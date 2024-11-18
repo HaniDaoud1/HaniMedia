@@ -27,7 +27,7 @@ function Regester() {
     }
 
     // Make API request to register user
-    const savedUserResponse = await fetch('http://localhost:3001/auth/register', {
+    const savedUserResponse = await fetch('http://localhost:3001/auth/regester', {
       method: 'POST',
       body: formData, // Send as FormData (no need for Content-Type header)
     });

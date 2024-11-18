@@ -31,7 +31,21 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //app.use(cors({ origin: "http://localhost:5174" }));
-
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://hanimedia.onrender.com", // Production domain
+];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow requests from this origin
+      } else {
+        callback(new Error("Not allowed by CORS")); // Block other origins
+      }
+    },
+  })
+);
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

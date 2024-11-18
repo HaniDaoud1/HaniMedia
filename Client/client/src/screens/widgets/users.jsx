@@ -12,6 +12,8 @@ const Users = ({ firstName, lastName, userId }) => {
   
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const render = useSelector((state) => state.auth.render);
+
   const [friendsIds, setFriendsIds] = useState([]);
   const [friendsDetails, setFriendsDetails] = useState([]);
   const [add,setAdd]=useState(true);
@@ -20,7 +22,7 @@ const Users = ({ firstName, lastName, userId }) => {
   const patchFriend = async () => {
     try {
       console.log("Fetching friends for user:", user._id);
-      const response = await fetch(`http://localhost:3001/user/${user._id}/friends`, {
+      const response = await fetch(`${render}/user/${user._id}/friends`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,7 +57,7 @@ const Users = ({ firstName, lastName, userId }) => {
   const GetUser = async () => {
     try {
       // Make a GET request to fetch the post
-      const response = await fetch(`http://localhost:3001/user/${userId}`, {
+      const response = await fetch(`${render}/user/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -107,7 +109,7 @@ const Users = ({ firstName, lastName, userId }) => {
           
             <div className={`bg-${color} rounded-lg p-4 my-2`}>
               <div className="flex flex-row items-center justify-evenly">
-              <div><img src={`http://localhost:3001/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
+              <div><img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
                 <div className="w-24">
                   {firstName} {lastName}
                 </div>

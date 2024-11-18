@@ -6,6 +6,8 @@ import { setNotFriends } from '../../state';
 function UsersLists() {
   const user =useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const render = useSelector((state) => state.auth.render);
+
   const dispatch=useDispatch();
 
   const [Users,setUsers]=useState(null);
@@ -14,7 +16,7 @@ function UsersLists() {
   const GetNotUsers = async () => {
     try {
       // Make a GET request to fetch the post
-      const response = await fetch(`http://localhost:3001/user/${user._id}/users`, {
+      const response = await fetch(`${render}/user/${user._id}/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

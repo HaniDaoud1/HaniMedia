@@ -29,6 +29,8 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     const token = useSelector((state) => state.auth.token);
     const friends=useSelector((state) => state.auth.friends);
     const user = useSelector((state) => state.auth.user);
+    const render = useSelector((state) => state.auth.render);
+
 
 
     
@@ -37,7 +39,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     const GetUser = async () => {
       try {
         // Make a GET request to fetch the post
-        const response = await fetch(`http://localhost:3001/user/${userId}`, {
+        const response = await fetch(`${render}/user/${userId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +75,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
       const post = posts.find((post) => post._id === postt);
       try {
         // Make a GET request to fetch the post
-        const response = await fetch(`http://localhost:3001/post/${post._id}/post`, {
+        const response = await fetch(`${render}/post/${post._id}/post`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -112,7 +114,7 @@ console.log(data)
   }
 
   try {
-    const response = await fetch(`http://localhost:3001/post/${post._id}/like`, {
+    const response = await fetch(`${render}/post/${post._id}/like`, {
       method: "PATCH",
       body: JSON.stringify({ userId: user._id }),
       headers: {
@@ -148,7 +150,7 @@ console.log(data)
     const patchFriend = async () => {
       try {
         // Send a PATCH request to add or remove a friend
-        const response = await fetch(`http://localhost:3001/user/${user._id}/${userId}`, { 
+        const response = await fetch(`${render}/user/${user._id}/${userId}`, { 
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -186,7 +188,7 @@ console.log(data)
     const coment = async () => {
       const post = posts.find((post) => post._id === postt);
       
-      const response = await fetch(`http://localhost:3001/post/${post._id}/comment`, {
+      const response = await fetch(`${render}/post/${post._id}/comment`, {
           method: "POST",
           body: JSON.stringify({
               userId: user.firstName ,
@@ -229,7 +231,7 @@ console.log(data)
         const fetchLikes = async () => {
           
           try {
-            const response = await fetch(`http://localhost:3001/post/${post._id}`, {
+            const response = await fetch(`${render}/post/${post._id}`, {
               method: "GET",
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -274,7 +276,7 @@ console.log(data)
     <div className={`${color} rounded-lg flex flex-col items-start p-2 mx-auto ${color2} my-2 max-lg:w-[100%]   h-auto min-[800px]:w-[100%] `} >
     <div className='flex flex-row justify-around items-center'>
     <div className='flex items-start  flex-row mx-4'>
-     <img src={`http://localhost:3001/assets/${userImg}`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
+     <img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
           <div className='flex flex-col'> <div className='flex flex-row'>
             <p className='font-bold mx-1 mt-3 '> {firstName}</p>
             <p className='font-bold mx-1 mt-3'>{lastName}</p></div> 
@@ -283,7 +285,7 @@ console.log(data)
             ): null}</div>
             </div>
             <p className={`text-sm flex flex-row text-start items-start mx-4  mb-2`}>{description}</p>
-            {picture && <img src={`http://localhost:3001/assets/${image}`}  alt="Post Image" className='bg-cover rounded-lg h-auto w-[95%]  mx-auto '/>}
+            {picture && <img src={`${render}/assets/${image}`}  alt="Post Image" className='bg-cover rounded-lg h-auto w-[95%]  mx-auto '/>}
             <div className='mt-2  flex flex-row '>
            <div onClick={Likes} className=' ml-5 mr-12 hover:text-slate-900 hover:cursor-pointer flex flex-row'>
             {like ?(

@@ -13,6 +13,9 @@ const Friend = ({ firstName, lastName, userId }) => {
   const friends= useSelector((state) => state.auth.user.friends);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const render = useSelector((state) => state.auth.render);
+
+  
   const [add,setAdd]=useState(true);
   const [userImg,setUserImg]=useState(null);
 
@@ -21,7 +24,7 @@ console.log(user.friends)
   const patchFriend = async () => {
     try {
       // Send a PATCH request to add or remove a friend
-      const response = await fetch(`http://localhost:3001/user/${user._id}/${userId}`, { 
+      const response = await fetch(`${render}/user/${user._id}/${userId}`, { 
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -58,7 +61,7 @@ console.log(user.friends)
   const GetUser = async () => {
     try {
       // Make a GET request to fetch the post
-      const response = await fetch(`http://localhost:3001/user/${userId}`, {
+      const response = await fetch(`${render}/user/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -106,7 +109,7 @@ console.log(user.friends)
           
             <div className={`${color} rounded-lg p-4 my-2`}>
               <div className="flex flex-row items-center justify-evenly">
-              <div><img src={`http://localhost:3001/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
+              <div><img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
                 <div className="w-24">
                   {firstName} {lastName}
                 </div>

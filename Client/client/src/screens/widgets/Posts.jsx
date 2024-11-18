@@ -9,10 +9,11 @@ function Posts({ userId, isProfile = false }) {
   const posts = useSelector((state) => state.auth.posts || []);
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const render = useSelector((state) => state.auth.render);
 
 console.log(posts)
   const getPosts = async () => {
-    const response = await fetch(`http://localhost:3001/post`, {
+    const response = await fetch(`${render}/post`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -22,7 +23,7 @@ console.log(posts)
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(`http://localhost:3001/post/${userId}/posts`, {
+    const response = await fetch(`${render}/post/${userId}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

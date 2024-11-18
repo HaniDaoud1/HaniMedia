@@ -8,6 +8,7 @@ import Dropzone from 'react-dropzone';
 function Regester() {
   const navigate = useNavigate();
   const mode = useSelector((state) => state.auth.mode);
+  const render = useSelector((state) => state.auth.render);
 
   const regesterSchema = yup.object().shape({
     firstName: yup.string().required('required'),
@@ -27,7 +28,7 @@ function Regester() {
     }
 
     // Make API request to register user
-    const savedUserResponse = await fetch('http://localhost:3001/auth/regester', {
+    const savedUserResponse = await fetch(`${render}/auth/regester`, {
       method: 'POST',
       body: formData, // Send as FormData (no need for Content-Type header)
     });

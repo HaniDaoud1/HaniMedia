@@ -13,6 +13,8 @@ const PostsWidgets = () => {
 
     const user = useSelector((state) => state.auth.user);
     const token = useSelector((state) => state.auth.token);
+    const render = useSelector((state) => state.auth.render);
+
 
     const _id = user ? user._id : null;
 
@@ -31,7 +33,7 @@ const PostsWidgets = () => {
         }
 
         try {
-            const response = await fetch('http://localhost:3001/posts', {
+            const response = await fetch(`${render}/posts`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,

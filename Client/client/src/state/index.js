@@ -5,6 +5,8 @@ const initialState = {
   token: null,
   posts: [],
   mode: "blanc",
+  render: "https://hanimedia8.onrender.com",
+  render2: "http://localhost:3001",
 };
 
 export const authSlice = createSlice({
@@ -17,6 +19,9 @@ export const authSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(action.payload.user)); // Store in localStorage
       localStorage.setItem("token", action.payload.token);
       console.log(state.user);
+    },
+    setRender: (state, action) => {
+      state.render = action.payload.render;
     },
     setLogout: (state) => {
       state.user = null;

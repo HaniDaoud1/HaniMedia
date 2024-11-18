@@ -8,11 +8,13 @@ import { MapPin } from 'lucide-react';
 const Profile = ({ userId }) => {
   const [user, setUser] = useState(null);
   const token = useSelector((state) => state.auth.token);
+  const render = useSelector((state) => state.auth.render);
+
   const navigate = useNavigate();
 
   const getUser = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/user/${userId}`, {
+      const response = await fetch(`${render}/user/${userId}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });

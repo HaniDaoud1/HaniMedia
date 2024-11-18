@@ -11,12 +11,14 @@ const UserWidget = ({ userId ,profile=false }) => {
   const [user, setUser] = useState(null);
   const userr = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
+  const render = useSelector((state) => state.auth.render);
+
   const navigate = useNavigate();
   const picture = "316102386_203916862002298_8645110410668679648_n.jpg";
   const getUser = async () => {
       
     try {
-      const response = await fetch(`http://localhost:3001/user/${userId}`, {
+      const response = await fetch(`${render}/user/${userId}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -48,7 +50,7 @@ const UserWidget = ({ userId ,profile=false }) => {
   return (
     <div className="h-auto w-[100%] min-[800px]:w-[100%]  bg-green-950 rounded-lg   p-2  mx-auto my-2 text-white flex flex-row justify-around">
         <div onClick={Profile} className='flex items-center  flex-col mx-2 max[sm]:m-0 max-[440px]:mx-0 justify-center mt-1'>
-        {userr.picture ? ( <img src={`http://localhost:3001/assets/${userr.picture}`} alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
+        {userr.picture ? ( <img src={`${render}/assets/${userr.picture}`} alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
         <div className=''>          
             <p className='font-bold hover:text-slate-400 hover:cursor-pointer'>{firstName} {lastName}</p>
            
@@ -78,7 +80,7 @@ const UserWidget = ({ userId ,profile=false }) => {
     return (
       <div className="h-auto w-[90%] bg-green-950 rounded-lg max-[440px]:p-1  p-4 mx-auto  text-white flex flex-col">
           <div className='flex items-start  flex-col mx-0 justify-center mt-1 bg-cover ml-1 '>
-              {userr.picture ? ( <img src={`http://localhost:3001/assets/${userr.picture}`} alt="Image" className='h-auto w-[49%] rounded-lg'/>):(<img src={img} className='h-48 w-[49%]   rounded-lg  mb-2 ml-1' />)}
+              {userr.picture ? ( <img src={`${render}/assets/${userr.picture}`} alt="Image" className='h-auto w-[49%] rounded-lg'/>):(<img src={img} className='h-48 w-[49%]   rounded-lg  mb-2 ml-1' />)}
               <div className=''>
               <p className='font-bold hover:text-slate-400 hover:cursor-pointer text-center m-auto'>{firstName} {lastName}</p>
              

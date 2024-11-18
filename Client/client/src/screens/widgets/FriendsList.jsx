@@ -8,12 +8,14 @@ function FriendsList() {
   const dispatch=useDispatch();
   const[User,setUser]=useState([]);
   const token = useSelector((state) => state.auth.token);
+  const render = useSelector((state) => state.auth.render);
+
 
     
   const GetUser = async () => {
     try {
       // Make a GET request to fetch the post
-      const response = await fetch(`http://localhost:3001/user/${user._id}/friends`, {
+      const response = await fetch(`${render}/user/${user._id}/friends`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

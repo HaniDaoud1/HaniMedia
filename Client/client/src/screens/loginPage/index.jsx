@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import {useNavigate} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLogin } from '../../state';
+import { setRender } from '../../state';
 
 
 const loginSchema=yup.object().shape({
@@ -13,8 +14,11 @@ const loginSchema=yup.object().shape({
 
 })
 function LoginPage() {
+
   const mode = useSelector((state) => state.auth.mode);
+  const render = useSelector((state) => state.auth.render);
   const color2 = mode === 'blanc' ? 'text-slate-700' : 'text-slate-200';
+
 
 const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   const dispatch=useDispatch();
@@ -22,15 +26,19 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   
   const user = useSelector((state) => state.auth.user);
   console.log(user);
+  dispatch(setRender({ render: "https://hanimedia8.onrender.com" }));
+  console.log(mode);
+  console.log(render)
   const handleFormSubmit=async(values,onSubmitProps)=>{
     const formData=new FormData();  
     for (let value in values){
       formData.append(value,values[value]);
       
     }
+    
    
     const savedUserResponse=await fetch(
-      'https://hanimedia8.onrender.com/auth/login',
+      `${render}/auth/login`,
       {
         method:"POST",   
         headers:{

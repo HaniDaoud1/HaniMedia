@@ -54,7 +54,6 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     
         // Parse the JSON data from the response
         const data = await response.json();
-        console.log(data)
         if (data && data.picture) {
           setUserImg(data.picture);
         } else {
@@ -70,7 +69,6 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
         // Handle errors and log the error message
         console.error("Error fetching post:", error.message);
       }}
-      console.log(posts)
     const GetPost = async () => {
       const post = posts.find((post) => post._id === postt);
       try {
@@ -82,7 +80,6 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
             "Content-Type": "application/json",
           },
         });
-        console.log(post._id)
     
         // Check if the response is OK (status code 200-299)
         if (!response.ok) {
@@ -91,7 +88,6 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     
         // Parse the JSON data from the response
         const data = await response.json();
-console.log(data)
     
         // If data exists and the first post has a picturePath, set it
         if (data && data.length > 0 && data[0].picturePath) {
@@ -99,7 +95,6 @@ console.log(data)
         } else {
           console.warn("No picturePath found in the post data.");
         }
-        console.log(data)
       } catch (error) {
         // Handle errors and log the error message
         console.error("Error fetching post:", error.message);
@@ -129,7 +124,6 @@ console.log(data)
 
     const data = await response.json();
 
-    console.log(data.likes);
     
     // Update the number of likes
     setNbrOfLikes(data.likes.length-1);
@@ -201,8 +195,6 @@ console.log(data)
       });
   
       const data = await response.json();
-      console.log(data.userId)
-      console.log(data.commentaire)
       setAddComment(data.commentaire);
       setUserId(data.userId)
       setCommentaire(''); // Reset comment input
@@ -244,7 +236,6 @@ console.log(data)
             }
       
             const data = await response.json();
-            console.log(data);
       
             // Assuming data.likes is an array of user IDs
             setNbrOfLikes(data.length-1); // Correctly set the number of likes
@@ -267,7 +258,6 @@ console.log(data)
     
     const color2 = mode === 'blanc' ? 'text-slate-700' : 'text-slate-200';
 
-    console.log(color2)
 
       const post = posts.find((post) => post._id === postt);
   return (
@@ -275,7 +265,7 @@ console.log(data)
     
     <div className={`${color} rounded-lg flex flex-col items-start p-2 mx-auto ${color2} my-2 max-lg:w-[100%]   h-auto min-[800px]:w-[100%] `} >
     <div className='flex flex-row justify-around items-center'>
-    <div className='flex items-start  flex-row mx-4'>
+    <div className='flex items-start  flex-row mx-4 hover:text-gray-500 hover:cursor-pointer'>
      <img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
           <div className='flex flex-col'> <div className='flex flex-row'>
             <p className='font-bold mx-1 mt-3 '> {firstName}</p>

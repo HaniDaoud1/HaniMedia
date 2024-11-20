@@ -19,7 +19,7 @@ function Regester() {
     profession: yup.string().required('required'),
     picture: yup.mixed().required('A picture is required'),
   });
-
+console.log(render)
   const handleFormSubmit = async (values, onSubmitProps) => {
     const formData = new FormData();
     
@@ -35,7 +35,6 @@ function Regester() {
     
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-    console.log(savedUser);
     
     if (savedUser) {
       navigate('/');

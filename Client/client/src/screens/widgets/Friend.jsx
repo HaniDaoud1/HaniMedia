@@ -20,7 +20,6 @@ const Friend = ({ firstName, lastName, userId }) => {
   const [userImg,setUserImg]=useState(null);
 
   const dispatch=useDispatch();
-console.log(user.friends)
   const patchFriend = async () => {
     try {
       // Send a PATCH request to add or remove a friend
@@ -39,7 +38,6 @@ console.log(user.friends)
   
       // Parse the JSON data from the response
       const data = await response.json();
-  console.log(data)
       // Update the Redux store with the new list of friends
       dispatch(setFriends({ friends: data }));
   

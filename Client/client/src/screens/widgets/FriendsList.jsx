@@ -43,7 +43,6 @@ function FriendsList() {
     useEffect(()=>{
       GetUser();
     },[])
-   console.log(user.friends)
   return (
     <>
 

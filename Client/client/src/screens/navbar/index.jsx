@@ -47,7 +47,6 @@ const dispatch=useDispatch();
 
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
-console.log(user)
   const [Mode ,settMode]=useState(mode);
 
   const ChangeMode=()=>{

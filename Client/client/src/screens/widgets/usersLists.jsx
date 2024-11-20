@@ -34,7 +34,6 @@ function UsersLists() {
       dispatch(setNotFriends({ notfriends: data }));
 
       setUsers(data);
-      console.log(data);
      
       
 
@@ -48,7 +47,6 @@ function UsersLists() {
     useEffect(()=>{
         GetNotUsers();
     },[]);
-    console.log(Users);
   return (
     <>
    

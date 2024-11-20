@@ -25,10 +25,7 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   const navigate=useNavigate();
   
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   dispatch(setRender({ render: "https://hanimedia8.onrender.com" }));
-  console.log(mode);
-  console.log(render)
   const handleFormSubmit=async(values,onSubmitProps)=>{
     const formData=new FormData();  
     for (let value in values){
@@ -51,7 +48,6 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
     )
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-    console.log(savedUser)
     if (savedUser){
       dispatch(
         setLogin({

@@ -11,7 +11,6 @@ function Posts({ userId, isProfile = false }) {
   const user = useSelector((state) => state.auth.user);
   const render = useSelector((state) => state.auth.render);
 
-console.log(posts)
   const getPosts = async () => {
     const response = await fetch(`${render}/post`, {
       method: "GET",
@@ -19,7 +18,6 @@ console.log(posts)
     });
     const data = await response.json();
     dispatch(setPosts({ posts: data }));
-    console.log(posts)
   };
 
   const getUserPosts = async () => {
@@ -28,7 +26,6 @@ console.log(posts)
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await response.json();
-    console.log(data)
     dispatch(setPosts({ posts: data }));
   };
 

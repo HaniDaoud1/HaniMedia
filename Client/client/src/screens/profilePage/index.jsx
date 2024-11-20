@@ -19,11 +19,11 @@ function ProfilePage() {
     const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
 
   return (
-    <><div className={` ${color} min-h-screen  py-2 flex sm:flex-row flex-col   p-0 min-[950px]:w-[80%]  mx-auto `}>
+    <><div className={` ${color}  min-h-screen  mx-auto py-2 flex sm:flex-row flex-col    min-[950px]:px-10  `}>
       <div className='sm:w-[55%]  mx-1 '>
       <UserWidget userId={_id} profile={false} />
       </div>
-     <div className='flex flex-col sm:w-[50%]'>
+     <div className='flex flex-col sm:w-[50%] mx-1'>
       <Posts userId={_id} isProfile={true}/>
       </div>
       </div>

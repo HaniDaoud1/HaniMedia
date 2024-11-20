@@ -15,7 +15,7 @@ function App() {
 
   return (
     <>
-   
+   <div >
       <Navbar/>
       <BrowserRouter>
       <Routes>
@@ -26,7 +26,7 @@ function App() {
         <Route path='/users/:userId' element={<AllUsers/>}/>
       </Routes>
       </BrowserRouter>
-      <Footer/>
+      <Footer/></div>
      
     
     </>

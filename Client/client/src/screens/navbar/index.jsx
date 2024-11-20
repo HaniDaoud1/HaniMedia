@@ -61,7 +61,7 @@ const dispatch=useDispatch();
 
   
   return (
-    <div className='h-20 bg-green-950 flex flex-row justify-between items-center'>
+    <div className='h-20 bg-green-950 flex flex-row justify-between items-center '>
         <div className=' flex flex-row items-center'>
         <a href="/home"><div className='m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div></a>
         <div className='max-md:hidden mx-5 disabled:block'><TextField className='text-white bg-green-700 rounded-lg md:block '  label="Recherche" variant="outlined" /></div>

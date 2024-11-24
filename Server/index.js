@@ -36,6 +36,18 @@ const allowedOrigins = [
   "https://hani-media-nemq.vercel.app", // Production domain
 ];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow requests from allowed origins
+      } else {
+        callback(new Error("Not allowed by CORS")); // Reject others
+      }
+    },
+    credentials: true, // Allow cookies if required
+  })
+);
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (!origin || allowedOrigins.includes(origin)) {

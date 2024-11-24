@@ -35,17 +35,26 @@ const allowedOrigins = [
   "http://localhost:5173", // Local development
   "https://hani-media-nemq.vercel.app", // Production domain
 ];
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow requests from this origin
-      } else {
-        callback(new Error("Not allowed by CORS")); // Block other origins
-      }
-    },
-  })
-);
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(204);
+    }
+  }
+  next();
+});
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

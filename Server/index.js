@@ -13,13 +13,10 @@ import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
 import postRoutes from "./routes/post.js";
 import { verifyToken } from "./meadelwear/auth.js";
-import { createPost, getFeedPost, getUserPost } from "./controllers/post.js";
-import User from "./models/User.js";
-import Post from "./models/post.js";
-import { users, posts } from "./data/index.js";
+import { createPost } from "./controllers/post.js";
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -29,11 +26,11 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+
 //app.use(cors({ origin: "http://localhost:5174" }));
 const allowedOrigins = [
   "http://localhost:5175", // Local development
-  "https://hani-media-nemq.vercel.app", // Production domain
+  "https://hanimedia.onrender.com", // Production domain
 ];
 
 app.use(
@@ -49,18 +46,24 @@ app.use(
   })
 );
 
-/* FILE STORAGE */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
+/* CLOUDINARY CONFIGURATION */
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "hani-media",
+    allowed_formats: ["jpeg", "png", "jpg"],
   },
 });
+
 const upload = multer({ storage });
 
-/* ROUTES WITH FILES */
+/* ROUTES WITH FILE UPLOADS */
 app.post("/auth/regester", upload.single("picture"), register);
 app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
@@ -74,9 +77,5 @@ mongoose
   .connect(process.env.MONGO_URL, {})
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-    /* ADD DATA ONE TIME */
-    //User.insertMany(users);
-    //Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));

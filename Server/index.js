@@ -27,25 +27,6 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-//app.use(cors({ origin: "http://localhost:5174" }));
-const allowedOrigins = [
-  "http://localhost:5175", // Local development
-  "https://hanimedia.onrender.com", // Production domain
-];
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow requests from allowed origins
-      } else {
-        callback(new Error("Not allowed by CORS")); // Reject others
-      }
-    },
-    credentials: true, // Allow cookies if required
-  })
-);
-
 /* CLOUDINARY CONFIGURATION */
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,

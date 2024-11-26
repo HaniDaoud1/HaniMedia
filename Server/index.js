@@ -31,21 +31,12 @@ app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //app.use(cors({ origin: "http://localhost:5174" }));
-const allowedOrigins = [
-  "http://localhost:5175", // Local development
-  "https://hani-media-nemq.vercel.app", // Production domain
-];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow requests from allowed origins
-      } else {
-        callback(new Error("Not allowed by CORS")); // Reject others
-      }
-    },
-    credentials: true, // Allow cookies if required
+    origin: "https://hani-media-nemq.vercel.app", // Origine autorisée
+    methods: ["GET", "POST", "PUT", "DELETE"], // Méthodes autorisées
+    allowedHeaders: ["Content-Type", "Authorization"], // En-têtes autorisés
   })
 );
 

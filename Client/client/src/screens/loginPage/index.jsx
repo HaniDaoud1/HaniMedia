@@ -38,6 +38,7 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
       `${render}/auth/login`,
       {
         method:"POST",   
+        mode: "no-cors",
         headers:{
           "Content-type":"application/json"
         },

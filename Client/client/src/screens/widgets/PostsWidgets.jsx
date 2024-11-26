@@ -84,6 +84,7 @@ const PostsWidgets = () => {
                         ) : (
                             <Image className='font-bold hover:cursor-pointer m-2 size-8' />
                         )}
+                        
                     </div>
                 )}
             </Dropzone>

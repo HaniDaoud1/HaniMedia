@@ -35,7 +35,7 @@ app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //app.use(cors({ origin: "http://localhost:5174" }));
 const allowedOrigins = [
   "http://localhost:5175", // Local development
-  "https://hani-media-nemq.vercel.app", // Production domain
+  "https://hani-media-2amb.vercel.app/", // Production domain
 ];
 
 app.use(

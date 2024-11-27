@@ -1,10 +1,9 @@
 
 {
-    "installCommand": "npm install --legacy-peer-deps",
     "version": 2,
     "builds": [
       {
-        "src": "index.js",
+        "src": "api/index.js",
         "use": "@vercel/node"
       },
       {
@@ -13,6 +12,36 @@
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/" }
+      {
+        "src": "/api/(.*)",
+        "dest": "api/index.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/api/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://hani-media-fnpp.vercel.app"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET, POST, OPTIONS"
+          },
+          {
+            "key": "Access-Control-Allow-Headers",
+            "value": "Content-Type, Authorization"
+          },
+          {
+            "key": "Access-Control-Allow-Credentials",
+            "value": "true"
+          }
+        ]
+      }
     ]
   }

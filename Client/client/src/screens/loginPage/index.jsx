@@ -25,7 +25,7 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   const navigate=useNavigate();
   
   const user = useSelector((state) => state.auth.user);
-  dispatch(setRender({ render: "https://hani-media-akfp.vercel.app" }));
+  dispatch(setRender({ render: "https://hani-media.vercel.app" }));
   const handleFormSubmit=async(values,onSubmitProps)=>{
     const formData=new FormData();  
     for (let value in values){

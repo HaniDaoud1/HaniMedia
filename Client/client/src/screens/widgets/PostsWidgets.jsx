@@ -33,7 +33,7 @@ const PostsWidgets = () => {
         }
 
         try {
-            const response = await fetch(`${render}/posts`, {
+            const response = await fetch(`${process.env.API_BASE_URL}/posts`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
                 body: formData,

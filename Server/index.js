@@ -47,10 +47,12 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true); // Allow requests from allowed origins
       } else {
-        callback(new Error("Not allowed by CORS")); // Reject others
+        callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // Allow cookies if required
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.options("*", cors());

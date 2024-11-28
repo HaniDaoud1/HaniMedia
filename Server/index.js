@@ -57,7 +57,7 @@ app.options("*", cors());
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/assets");
+    cb(null, "/tmp");
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

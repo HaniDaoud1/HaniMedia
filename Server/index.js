@@ -40,7 +40,7 @@ const allowedOrigins = [
   "http://localhost:5173", // Local development
   "https://hani-media-fnpp.vercel.app", // Production domain
 ];
-
+app.use(cors({ origin: "*" }));
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -51,8 +51,6 @@ app.use(
       }
     },
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.options("*", cors());

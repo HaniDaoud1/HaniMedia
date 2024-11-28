@@ -30,7 +30,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.options("*", cors());
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 //app.use(cors({ origin: "http://localhost:5174" }));
 const allowedOrigins = [
@@ -53,7 +53,7 @@ app.use(
     credentials: true, // Allow cookies if required
   })
 );
-
+app.options("*", cors());
 /* FILE STORAGE */
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -23,7 +23,7 @@ const Friend = ({ firstName, lastName, userId }) => {
   const patchFriend = async () => {
     try {
       // Send a PATCH request to add or remove a friend
-      const response = await fetch(`${process.env.API_BASE_URL}/user/${user._id}/${userId}`, { 
+      const response = await fetch(`${render}/user/${user._id}/${userId}`, { 
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -59,7 +59,7 @@ const Friend = ({ firstName, lastName, userId }) => {
   const GetUser = async () => {
     try {
       // Make a GET request to fetch the post
-      const response = await fetch(`${process.env.API_BASE_URL}/user/${userId}`, {
+      const response = await fetch(`${render}/user/${userId}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

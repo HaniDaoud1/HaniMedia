@@ -39,7 +39,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     const GetUser = async () => {
       try {
         // Make a GET request to fetch the post
-        const response = await fetch(`${process.env.API_BASE_URL}/user/${userId}`, {
+        const response = await fetch(`${render}/user/${userId}`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
       const post = posts.find((post) => post._id === postt);
       try {
         // Make a GET request to fetch the post
-        const response = await fetch(`${process.env.API_BASE_URL}/post/${post._id}/post`, {
+        const response = await fetch(`${render}/post/${post._id}/post`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
   }
 
   try {
-    const response = await fetch(`${process.env.API_BASE_URL}/post/${post._id}/like`, {
+    const response = await fetch(`${render}/post/${post._id}/like`, {
       method: "PATCH",
       body: JSON.stringify({ userId: user._id }),
       headers: {
@@ -144,7 +144,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     const patchFriend = async () => {
       try {
         // Send a PATCH request to add or remove a friend
-        const response = await fetch(`${process.env.API_BASE_URL}/user/${user._id}/${userId}`, { 
+        const response = await fetch(`${render}/user/${user._id}/${userId}`, { 
           method: "PATCH",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -182,7 +182,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     const coment = async () => {
       const post = posts.find((post) => post._id === postt);
       
-      const response = await fetch(`${process.env.API_BASE_URL}/post/${post._id}/comment`, {
+      const response = await fetch(`${render}/post/${post._id}/comment`, {
           method: "POST",
           body: JSON.stringify({
               userId: user.firstName ,
@@ -223,7 +223,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
         const fetchLikes = async () => {
           
           try {
-            const response = await fetch(`${process.env.API_BASE_URL}/post/${post._id}`, {
+            const response = await fetch(`${render}/post/${post._id}`, {
               method: "GET",
               headers: {
                 Authorization: `Bearer ${token}`,

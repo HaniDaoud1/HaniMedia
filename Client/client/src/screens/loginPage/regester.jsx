@@ -28,7 +28,7 @@ console.log(render)
     }
 
     // Make API request to register user
-    const savedUserResponse = await fetch(`${process.env.API_BASE_URL}/auth/regester`, {
+    const savedUserResponse = await fetch(`${render}/auth/regester`, {
       method: 'POST',
       body: formData, // Send as FormData (no need for Content-Type header)
     });

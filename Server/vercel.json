@@ -7,19 +7,19 @@
         "use": "@vercel/node"
       }
     ],
-    "routes": [
+    "rewrites": [
       {
-        "src": "/api/(.*)", 
-        "dest": "index.js"
+        "source": "/api/(.*)",
+        "destination": "/index.js"
       }
     ],
     "headers": [
       {
-        "source": "/api/(.*)", 
+        "source": "/api/(.*)",
         "headers": [
           {
             "key": "Access-Control-Allow-Origin", 
-            "value": "https://hani-media-fnpp.vercel.app" 
+            "value": "https://hani-media-fnpp.vercel.app"
           },
           {
             "key": "Access-Control-Allow-Methods", 

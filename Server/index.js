@@ -41,18 +41,22 @@ const allowedOrigins = [
   "https://hani-media-fnpp.vercel.app", // Production domain
 ];
 app.use(cors({ origin: "*" }));
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true); // Allow requests from allowed origins
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  })
-);
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (!origin || allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization"
+    );
+  }
+  next();
+});
 app.options("*", cors());
 /* FILE STORAGE */
 const storage = multer.diskStorage({

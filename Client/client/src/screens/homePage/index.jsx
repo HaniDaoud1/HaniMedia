@@ -15,7 +15,7 @@ function HomePage() {
   const mode = useSelector((state) => state.auth.mode);
   const render = useSelector((state) => state.auth.render);
   const { _id } = useSelector((state) => state.auth.user || {}); // Accessing user within auth slice
-const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
+const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-gray-950';
   return (
     <> <div className={`${color} min-h-screen  `}><div  className={` flex sm:flex-row flex-col justify-evenly  p-0 min-[950px]:w-[80%]  mx-auto    `}>
       <div className=' sm:w-[100%]  mx-1  '>

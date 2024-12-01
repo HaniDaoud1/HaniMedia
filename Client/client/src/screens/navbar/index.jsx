@@ -16,6 +16,7 @@ import { UserRound } from 'lucide-react';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
+import { useEffect } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,16 +50,16 @@ const dispatch=useDispatch();
   const user = useSelector((state) => state.auth.user);
   const [Mode ,settMode]=useState(mode);
 
-  const ChangeMode=()=>{
-    if (Mode=='blanc'){
-      settMode('black');
-      dispatch(setMode({ mode: 'black' }));
-    }else{
-      settMode('blanc');
-      dispatch(setMode({ mode: 'blanc' }));
-    }
-  }
-
+  const ChangeMode = () => {
+    const newMode = Mode === 'blanc' ? 'black' : 'blanc';
+    settMode(newMode);
+    dispatch(setMode({ mode: newMode }));
+    localStorage.setItem('mode', newMode);
+  };
+  useEffect(() => {
+    const savedMode = localStorage.getItem('mode') || 'blanc';
+    dispatch(setMode({ mode: savedMode }));
+  }, [dispatch]);
   
   return (
     <div className='h-20 bg-green-950 flex flex-row justify-between items-center '>

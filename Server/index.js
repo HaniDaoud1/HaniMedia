@@ -38,7 +38,8 @@ const allowedOrigins = [
   "http://localhost:5174",
   "http://localhost:5175",
   "http://localhost:5173", // Local development
-  "https://hani-media-fnpp.vercel.app", // Production domain
+  "https://hani-media-fnpp.vercel.app",
+  "https://hanimedia.onrender.com", // Production domain
 ];
 app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {

@@ -13,4 +13,12 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  safelist: [
+    "bg-slate-300",
+    "bg-grey-950",
+    "bg-slate-400",
+    "bg-slate-700",
+    "text-slate-700",
+    "text-slate-200",
+  ],
 };

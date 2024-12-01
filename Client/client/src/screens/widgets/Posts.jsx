@@ -21,7 +21,7 @@ function Posts({ userId, isProfile = false }) {
   };
 
   const getUserPosts = async () => {
-    const response = await fetch(`${process.env.API_BASE_URL}/post/${userId}/posts`, {
+    const response = await fetch(`${render}/post/${userId}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

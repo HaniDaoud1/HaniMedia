@@ -71,7 +71,7 @@ const dispatch=useDispatch();
             <MessageCircle className=' max-sm:size-5 mr-3 ml-1 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-1 max-sm:mx-2 text-white '/>
             <Bell className='max-sm:hidden max-sm:size-5 mx-3 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-1 text-sm md:size-small text-white'/>
             {user ? (<a className='sm:hidden' href={`/users/${user._id}`}><UserRound className='max-sm:size-5 font-medium mx-3 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-2 text-sm text-white '/></a>):null}
-            {Mode === 'blanc' ? <Moon className='hover:text-slate-900 rounded-full ml-3 hover:cursor-pointer max-[420px]:mx-1 text-sm' onClick={ChangeMode} /> : <Sun className='hover:text-slate-400 hover:cursor-pointer ml-3 rounded-full max-[420px]:mx-1' onClick={ChangeMode} /> }
+            {Mode === 'blanc' ? <Moon className='hover:text-slate-900 rounded-full ml-3 text-white hover:cursor-pointer max-[420px]:mx-1 text-sm' onClick={ChangeMode} /> : <Sun className='hover:text-slate-400 text-white hover:cursor-pointer ml-3 rounded-full max-[420px]:mx-1' onClick={ChangeMode} /> }
             {user ? (<DropdownMenu>
        
        <DropdownMenuTrigger className='mr-8 ml-20 p-0 hover:null rounded-full hover:cursor-pointer max-sm:mr-3 max-sm:ml-8 max-[365px]:ml-4 bg-green-950'>{user ? (<img src={`http://localhost:3001/assets/${user.picture}`} alt="Image" className='h-12 w-12 rounded-full  '/> ):(<Avatar/>)}</DropdownMenuTrigger>

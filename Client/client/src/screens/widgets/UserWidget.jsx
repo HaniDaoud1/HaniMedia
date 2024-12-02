@@ -79,7 +79,7 @@ const UserWidget = ({ userId ,profile=false }) => {
     return (
       <div className="h-auto w-[90%] bg-green-950 rounded-lg max-[440px]:p-1  p-4 mx-auto  text-white flex flex-col">
           <div className='flex items-start  flex-col mx-0 justify-center mt-1 bg-cover ml-1 '>
-              {userr.picture ? ( <img src={`${render}/assets/${userr.picture}`} alt="Image" className='h-auto w-[49%] rounded-lg'/>):(<img src={img} className='h-48 w-[49%]   rounded-lg  mb-2 ml-1' />)}
+              {userr.picture ? ( <img src={(userr.picture.startsWith("http") ? userr.picture : `${render}/assets/${userr.picture}`)} alt="Image" className='h-auto w-[49%] rounded-lg'/>):(<img src={img} className='h-48 w-[49%]   rounded-lg  mb-2 ml-1' />)}
               <div className=''>
               <p className='font-bold hover:text-slate-400 hover:cursor-pointer text-center m-auto'>{firstName} {lastName}</p>
              

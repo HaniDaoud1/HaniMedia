@@ -17,6 +17,7 @@ import { createPost, getFeedPost, getUserPost } from "./controllers/post.js";
 import User from "./models/User.js";
 import Post from "./models/post.js";
 import { users, posts } from "./data/index.js";
+import { upload } from "./cloudinary.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,10 +42,9 @@ const allowedOrigins = [
   "https://hani-media-fnpp.vercel.app",
   "https://hanimedia.onrender.com", // Production domain
 ];
-app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (!origin || allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader(
@@ -60,15 +60,6 @@ app.use((req, res, next) => {
 });
 app.options("*", cors());
 /* FILE STORAGE */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/pubic/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
 
 /* ROUTES WITH FILES */
 app.post("/auth/regester", upload.single("picture"), register);

@@ -77,7 +77,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         });
     
@@ -266,7 +266,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     <div className={`${color} rounded-lg flex flex-col items-start p-2 mx-auto ${color2} my-2 max-lg:w-[100%]   h-auto min-[800px]:w-[100%] `} >
     <div className='flex flex-row justify-around items-center'>
     <div className='flex items-start  flex-row mx-4 hover:text-gray-500 hover:cursor-pointer'>
-     <img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
+     <img src={userImg ? (userImg.startsWith("http") ? userImg : `${render}/assets/${userImg}`):"/assets/placeholder.jpg"}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
           <div className='flex flex-col'> <div className='flex flex-row'>
             <p className='font-bold mx-1 mt-3 '> {firstName}</p>
             <p className='font-bold mx-1 mt-3'>{lastName}</p></div> 
@@ -275,7 +275,10 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
             ): null}</div>
             </div>
             <p className={`text-sm flex flex-row text-start items-start mx-4  mb-2`}>{description}</p>
-            {picture && <img src={`${render}/assets/${image}`}  alt="Post Image" className='bg-cover rounded-lg h-auto w-[95%]  mx-auto '/>}
+            {picture && <img
+  src={image ? (image.startsWith("http") ? image : `${render}/assets/${image}`) : "/assets/placeholder.jpg"}
+  alt="Post image"
+ className='bg-cover rounded-lg h-auto w-[95%]  mx-auto '/>}
             <div className='mt-2  flex flex-row '>
            <div onClick={Likes} className=' ml-5 mr-12 hover:text-slate-900 hover:cursor-pointer flex flex-row'>
             {like ?(

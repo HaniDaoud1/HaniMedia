@@ -45,7 +45,7 @@ const dispatch=useDispatch();
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-
+  const render = useSelector((state) => state.auth.render);
   const mode = useSelector((state) => state.auth.mode);
   const user = useSelector((state) => state.auth.user);
   const [Mode ,settMode]=useState(mode);
@@ -75,7 +75,7 @@ const dispatch=useDispatch();
             {Mode === 'blanc' ? <Moon className='hover:text-slate-900 rounded-full ml-3 text-white hover:cursor-pointer max-[420px]:mx-1 text-sm' onClick={ChangeMode} /> : <Sun className='hover:text-slate-400 text-white hover:cursor-pointer ml-3 rounded-full max-[420px]:mx-1' onClick={ChangeMode} /> }
             {user ? (<DropdownMenu>
        
-       <DropdownMenuTrigger className='mr-8 ml-20 p-0 hover:null rounded-full hover:cursor-pointer max-sm:mr-3 max-sm:ml-8 max-[365px]:ml-4 bg-green-950'>{user ? (<img src={`http://localhost:3001/assets/${user.picture}`} alt="Image" className='h-12 w-12 rounded-full  '/> ):(<Avatar/>)}</DropdownMenuTrigger>
+       <DropdownMenuTrigger className='mr-8 ml-20 p-0 hover:null rounded-full hover:cursor-pointer max-sm:mr-3 max-sm:ml-8 max-[365px]:ml-4 bg-green-950'>{user ? (<img src={(user.picture.startsWith("http") ? user.picture : `${render}/assets/${user.picture}`)} alt="Image" className='h-12 w-12 rounded-full  '/> ):(<Avatar/>)}</DropdownMenuTrigger>
        <DropdownMenuContent>
          <DropdownMenuLabel>My Account</DropdownMenuLabel>
          <DropdownMenuSeparator />

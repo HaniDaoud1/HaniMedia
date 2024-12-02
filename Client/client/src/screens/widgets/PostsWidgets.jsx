@@ -20,37 +20,38 @@ const PostsWidgets = () => {
 
     const handlePosts = async () => {
         if (!_id) {
-            console.error("User ID is missing");
-            return;
+          console.error("User ID is missing");
+          return;
         }
-
+      
         const formData = new FormData();
         formData.append("userId", _id);
         formData.append("description", post);
         if (image) {
-            formData.append("picture", image);
-            formData.append("picturePath", image.name);
+          formData.append("picture", image); // Ensure 'picture' matches the backend
         }
-
+      
         try {
-            const response = await fetch(`${render}/posts`, {
-                method: "POST",
-                headers: { Authorization: `Bearer ${token}` },
-                body: formData,
-            });
-             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const posts = await response.json();
-            dispatch(setPosts({ posts }));
-            setImage(null);
-            setImagePreview(null); // Reset image preview
-            setPost('');
+          const response = await fetch(`${render}/posts`, {
+            method: "POST",
+            headers: { Authorization: `Bearer ${token}` },
+            "Content-Type": "multipart/form-data",
+            body: formData,
+          });
+      
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+      
+          const posts = await response.json();
+          dispatch(setPosts({ posts }));
+          setImage(null);
+          setImagePreview(null); // Reset image preview
+          setPost('');
         } catch (error) {
-            console.error('Error posting data:', error);
+          console.error('Error posting data:', error);
         }
-    };
+      };
     const mode = useSelector((state) => state.auth.mode);
       
     const color = mode === 'blanc' ? 'bg-slate-400' : 'bg-slate-700';

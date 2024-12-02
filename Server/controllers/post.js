@@ -1,38 +1,46 @@
 import Post from "../models/post.js";
 import User from "../models/User.js";
-
+import { upload } from "../cloudinary.js";
 export const createPost = async (req, res) => {
   try {
-    const { userId, description } = req.body; // Ensure description is correct
-    const user = await User.findById(userId);
+    const { userId, description } = req.body;
 
+    // Check if the user exists
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if a file has been uploaded by Multer
-    const picturePath = req.file ? req.file.filename : null; // Extract the filename from multer (if available)
-
+    // Upload the picture to Cloudinary and get the URL
+    let picturePath = null;
+    if (req.file) {
+      picturePath = req.file.path; // Cloudinary URL
+    }
+    console.log(req.file.path + "...........");
+    // Create a new post with the Cloudinary URL
     const newPost = new Post({
       userId,
       firstName: user.firstName,
       lastName: user.lastName,
       location: user.location,
-      description, // Correct spelling here
+      description,
       userPicturePath: user.picturePath,
-      picturePath, // Store the file path
+      picturePath, // Cloudinary URL
       likes: {},
       comments: [],
     });
-    console.log(description);
+
+    console.log("New post description:", description); // Log description for debugging
     await newPost.save();
 
-    // Return all posts after creating the new post
+    // Return all posts after creating the new one
     const posts = await Post.find();
     res.status(201).json(posts);
   } catch (error) {
     console.error("Error creating post:", error.message);
-    res.status(500).json({ message: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to create post", error: error.message });
   }
 };
 export const getFeedPost = async (req, res) => {

@@ -9,7 +9,28 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUser } from '../../../../../Server/controllers/users';
-
+import { Ellipsis } from 'lucide-react';
+import { setPosts } from '../../state';
+import { setProfile } from '../../state';
+import { 
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+ } from '@radix-ui/react-select';
+ import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 function Post({description,image,firstName,lastName,location,profession,userId,postt}) {
   const [add,setAdd]=useState(true);
@@ -35,7 +56,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
 
     
    
-    
+   
     const GetUser = async () => {
       try {
         // Make a GET request to fetch the post
@@ -68,7 +89,36 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
       } catch (error) {
         // Handle errors and log the error message
         console.error("Error fetching post:", error.message);
-      }}
+      }};
+     
+      const DeleteUser = async () => {
+        const post = posts.find((post) => post._id === postt);
+        try {
+          // Make a GET request to fetch the post
+          const response = await fetch(`${render}/post/${post._id}/delete`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+      
+          // Check if the response is OK (status code 200-299)
+          if (!response.ok) {
+            throw new Error(`Failed to fetch post: ${response.statusText}`);
+          }
+          const updatedPosts = posts.filter((post) => post._id !== postt);
+          dispatch(setPosts({ posts: updatedPosts })); // Update Redux store
+
+  
+      
+          // If data exists and the first post has a picturePath, set it
+          
+        } catch (error) {
+          // Handle errors and log the error message
+          console.error("Error fetching post:", error.message);
+        }};
+      
     const GetPost = async () => {
       const post = posts.find((post) => post._id === postt);
       try {
@@ -202,6 +252,7 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
       useEffect(()=>{
         coment();
       },[]);
+      
      
       useEffect(()=>{
         GetUser();
@@ -250,6 +301,18 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
         }
       }, [ user._id, token]); // Add relevant dependencies
 
+
+
+      const GetProfile = async () => {
+       
+          if (user._id !== userId){
+            dispatch(setProfile({ profile: userId }));
+            navigate(`/user-profile/:userId`)
+          }else{
+            navigate('/profile/:userId')
+          } 
+         }
+
       const mode = useSelector((state) => state.auth.mode);
     
 
@@ -265,14 +328,27 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     
     <div className={`${color} rounded-lg flex flex-col items-start p-2 mx-auto ${color2} my-2 max-lg:w-[100%]   h-auto min-[800px]:w-[100%] `} >
     <div className='flex flex-row justify-around items-center'>
-    <div className='flex items-start  flex-row mx-4 hover:text-gray-500 hover:cursor-pointer'>
+    <div onClick={() => navigate(`/user-profile/${userId}`)} className='flex items-start   flex-row mx-4 hover:text-gray-500 hover:cursor-pointer'>
      <img src={userImg ? (userImg.startsWith("http") ? userImg : `${render}/assets/${userImg}`):"/assets/placeholder.jpg"}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
           <div className='flex flex-col'> <div className='flex flex-row'>
             <p className='font-bold mx-1 mt-3 '> {firstName}</p>
             <p className='font-bold mx-1 mt-3'>{lastName}</p></div> 
-            <p className=' text-sm '>{location}</p></div></div>
-            <div className='' >{post.userId !== user._id ? (add ? (<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 text-green-600 hover:cursor-pointer hover:bg-slate-800'><UserRoundPlus /></div>):(<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 hover:cursor-pointer text-red-600 hover:bg-slate-800'><UserRoundMinus /></div>)
+            <p className=' text-sm '>{location}</p></div>
+           </div>
+            <div className='flex flex-row justify-between' >{post.userId !== user._id ? (add ? (<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 text-green-600 hover:cursor-pointer hover:bg-slate-800'><UserRoundPlus /></div>):(<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 hover:cursor-pointer text-red-600 hover:bg-slate-800'><UserRoundMinus /></div>)
             ): null}</div>
+            <div >
+            {user._id == userId ? (<DropdownMenu >
+            <DropdownMenuTrigger className={` ml-36 mr-4  p-0 hover:null rounded-full hover:cursor-pointer   ${color} `}><Ellipsis/></DropdownMenuTrigger>
+       <DropdownMenuContent  >
+         <DropdownMenuLabel>My Post</DropdownMenuLabel>
+         <DropdownMenuSeparator />
+         <DropdownMenuItem onClick={DeleteUser} className='text-red-800 font-bold'>Delete</DropdownMenuItem>
+       </DropdownMenuContent>
+     </DropdownMenu>):null}
+      
+    
+             </div>
             </div>
             <p className={`text-sm flex flex-row text-start items-start mx-4  mb-2`}>{description}</p>
             {picture && <img

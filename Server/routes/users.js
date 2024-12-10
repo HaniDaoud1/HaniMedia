@@ -5,6 +5,8 @@ import {
   getUserFreinds,
   addRemouveUser,
   getUsersNotFriends,
+  getUsers,
+  getUsers2,
 } from "../controllers/users.js";
 
 const router = express.Router();
@@ -12,6 +14,8 @@ const router = express.Router();
 //read
 router.get("/:id", verifyToken, getUser);
 router.get("/:id/friends", verifyToken, getUserFreinds);
+router.get("/all", verifyToken, getUsers);
+router.get("/:id/allusers", verifyToken, getUsers);
 
 //update
 router.patch("/:id/:friendsId", verifyToken, addRemouveUser);

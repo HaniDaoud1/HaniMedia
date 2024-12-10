@@ -106,6 +106,23 @@ export const likePosts = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const DeletePost = async (req, res) => {
+  try {
+    const { _id } = req.params; // Post ID
+
+    // Find the post by its ID
+    const post = await Post.findById(_id);
+
+    await Post.findByIdAndDelete(_id);
+
+    // Optionally return the remaining posts
+    const posts = await Post.find(); // Fetch all posts after deletion
+    res.status(200).json(posts);
+  } catch (error) {
+    // Catch and respond with any errors
+    res.status(500).json({ message: error.message });
+  }
+};
 export const likedPosts = async (req, res) => {
   try {
     const { _id } = req.params; // Post ID

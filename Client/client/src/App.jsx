@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import AllUsers from './screens/widgets/AllUsers'
 import FriendsList from './screens/widgets/FriendsList'
 import Footer from './screens/navbar/Footer'
+import Profile from './screens/widgets/Profile'
 
 function App() {
   const Auth=Boolean(useSelector((state)=>state.token))
@@ -24,6 +25,7 @@ function App() {
         <Route path='/regester' element={<Regester/>}/>
         <Route path='/profile/:userId' element={<ProfilePage/>}/>
         <Route path='/users/:userId' element={<AllUsers/>}/>
+        <Route path='/user-profile/:userId' element={<Profile/>}/>
       </Routes>
       </BrowserRouter>
       <Footer/></div>

@@ -54,11 +54,11 @@ function FriendsList() {
   return (
     <>
 
-    {user.friends.length !==0 ?(<h1 className={`mt-2 font-bold text-xl bg-green-950 rounded-lg`}>Friends:</h1>):null}
+    {user.friends.length !==0 ?(<h1 className={`mt-2 font-bold text-xl text-white bg-green-950 rounded-lg`}>Friends:</h1>):null}
     {user.friends ? user.friends.map((friend) => (
   <Friend userId={friend._id} firstName={friend.firstName} lastName={friend.lastName} key={`friend-${friend._id}`} />
 )):null}
-<h1 className="mt-2 font-bold text-xl bg-green-950 rounded-lg">Users:</h1>
+<h1 className="mt-2 font-bold text-xl text-white bg-green-950 rounded-lg">Users:</h1>
 
     </>
   )

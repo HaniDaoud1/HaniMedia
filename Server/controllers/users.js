@@ -10,6 +10,14 @@ export const getUser = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+export const getUsers = async (req, res) => {
+  try {
+    const user = await User.find({});
+    res.status(201).json(user);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 export const getUserFreinds = async (req, res) => {
   try {
     const { id } = req.params;
@@ -45,6 +53,38 @@ export const getUsersNotFriends = async (req, res) => {
         !user.friends.includes(potentialFriend._id.toString()) &&
         potentialFriend._id.toString() !== id
     );
+
+    // Format the response for the users who are not friends
+    const formattedNotFriends = notFriends.map(
+      ({ _id, firstName, lastName, occupation, location, picturePath }) => ({
+        _id,
+        firstName,
+        lastName,
+        occupation,
+        location,
+        picturePath,
+      })
+    );
+
+    res.status(200).json(formattedNotFriends);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+export const getUsers2 = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Retrieve all users from the database
+    const allUsers = await User.find({});
+
+    // Filter out users who are friends with the given user
+    const notFriends = allUsers;
 
     // Format the response for the users who are not friends
     const formattedNotFriends = notFriends.map(

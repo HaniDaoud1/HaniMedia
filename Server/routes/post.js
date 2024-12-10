@@ -7,6 +7,7 @@ import {
   addComment,
   likedPosts,
   getUserPost2,
+  DeletePost,
 } from "../controllers/post.js";
 
 const router = express.Router();
@@ -18,5 +19,7 @@ router.get("/:_id", verifyToken, likedPosts);
 
 router.patch("/:id/like", verifyToken, likePosts);
 router.post("/:id/comment", verifyToken, addComment);
+
+router.delete("/:_id/delete", verifyToken, DeletePost);
 
 export default router;

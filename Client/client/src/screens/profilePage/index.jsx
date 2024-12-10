@@ -11,8 +11,7 @@ function ProfilePage() {
   const navigate=useNavigate();
   const user = useSelector((state) => state.auth.user); // Get user object from Redux stateconsole.log(_id);
   const { _id } = user; // Destructure _id after confirming user is not null
-  console.log(_id);
-  console.log(user);
+  
   const mode = useSelector((state) => state.auth.mode);
       
 

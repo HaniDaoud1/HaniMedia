@@ -49,6 +49,9 @@ export const authSlice = createSlice({
         console.error("Friends existants ...");
       }
     },
+    setProfile: (state, action) => {
+      state.profile = action.payload.profile;
+    },
     setPosts: (state, action) => {
       state.posts = action.payload.posts;
     },
@@ -73,6 +76,7 @@ export const {
   setNotFriends,
   setRender,
   setMove,
+  setProfile,
 } = authSlice.actions;
 
 export default authSlice.reducer;

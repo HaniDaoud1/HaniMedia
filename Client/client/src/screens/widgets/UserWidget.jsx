@@ -14,7 +14,6 @@ const UserWidget = ({ userId ,profile=false }) => {
   const render = useSelector((state) => state.auth.render);
 
   const navigate = useNavigate();
-  const picture = "316102386_203916862002298_8645110410668679648_n.jpg";
   const getUser = async () => {
       
     try {
@@ -49,7 +48,7 @@ const UserWidget = ({ userId ,profile=false }) => {
   return (
     <div className="h-auto w-[100%] min-[800px]:w-[100%]  bg-green-950 rounded-lg   p-2  mx-auto my-2 text-white flex flex-row justify-around">
         <div onClick={Profile} className='flex items-center  flex-col mx-2 max[sm]:m-0 max-[440px]:mx-0 justify-center mt-1'>
-        {userr.picture ? ( <img src={`${render}/assets/${userr.picture}`} alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
+        {user.picture ? ( <img src={(user.picture.startsWith("http") ? user.picture : `${render}/assets/${user.picture}`)}  alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
         <div className=''>          
             <p className='font-bold hover:text-slate-400 hover:cursor-pointer'>{firstName} {lastName}</p>
            

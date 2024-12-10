@@ -149,7 +149,10 @@ const dispatch=useDispatch();
      </div> </div> </div> ):
    
     <div className='flex flex-row justify-between items-center '>
-    {user ? (<a href="/home"><div className='max-sm:m-2 m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div></a>):(<div className='m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div>)}{!search && !isSmallScreen ? <div className='flex  items-end justify-center '>  <div className=' mx-5  '> <TextField className='text-white bg-green-700 rounded-lg  '  label="Recherche" variant="outlined" onChange={handleSearch} />
+    {user ? (<a href="/home"><div className='max-sm:m-2 m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div></a>):
+    (<div className='m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div>)}
+    {!search && !isSmallScreen ? <div className='flex  items-end justify-center '> 
+       <div className=' mx-5  '> <TextField className='text-white bg-green-700 rounded-lg  '  label="Recherche" variant="outlined" onChange={handleSearch} />
     <div className='bg-slate-600 content-center text-center m-auto z-10 absolute top-0 mt-20 border border-green-950 rounded-lg mx-auto'>
         {usersSearch ? (users.filter((val)=>{
         return val.firstName.toLowerCase().includes(usersSearch) || val.lastName.toLowerCase().includes(usersSearch)})

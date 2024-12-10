@@ -60,6 +60,7 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
       navigate('/home')
     }}
   return (
+    <> {user ? navigate('/home'):
     <div className={`${color} min-h-screen pt-8`}>
       
        
@@ -119,8 +120,8 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
      </Formik>
      <p className={`mt-6 ${color2}`}>Don't have an acount ? <a href="/regester" className='text-blue-600'>SingUp</a></p>
       
-    </div>
-  )
+    </div>}
+    </>)
 }
 
 export default LoginPage

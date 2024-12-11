@@ -147,7 +147,7 @@ const dispatch=useDispatch();
      </div> </div> </div> ):
    
     <div className='flex flex-row justify-between items-center '>
-    {user ? (<a href="/home"><div className='max-sm:m-2 m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div></a>):
+    {user ? (<a href="/home"><div className='max-sm:ml-4 m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div></a>):
     (<div className='m-4 hover:cursor-pointer ' ><h1 className='text-2xl font-bold sm:ml-8 sm:text-4xl text-white hover:text-gray-200 '>HaniMedia</h1></div>)}
     {!search && !isSmallScreen ? <div className='flex  items-end justify-center '> 
        <div className=' mx-5  '> <TextField className='text-white bg-green-700 rounded-lg  '  label="Recherche" variant="outlined" onChange={handleSearch} />
@@ -163,7 +163,7 @@ const dispatch=useDispatch();
         })):null}</div>
      </div> </div>: null}
      
-     <div id='message' className=' flex flex-row  items-center max-[450px]:mx-4 max-[450px]:mr-2 mx-8 '>
+     <div id='message' className=' flex flex-row  items-center max-[450px]:ml-2 max-[450px]:mr-1 ml-8 mr-4 '>
            <Search onClick={hundleSearch} className=' max-sm:size-5 mr-3 ml-1 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-1 max-sm:mx-2 text-white '/>
             <Bell className='max-sm:hidden max-sm:size-5 mx-3 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-1 text-sm md:size-small text-white'/>
             {user ? (<a className='sm:hidden' href={`/users/${user._id}`}><UserRound className='max-sm:size-5 font-medium mx-3 hover:cursor-pointer hover:text-gray-400 max-[420px]:mx-2 text-sm text-white '/></a>):null}

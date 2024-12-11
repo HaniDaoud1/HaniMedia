@@ -6,6 +6,8 @@ import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { UserRoundMinus } from 'lucide-react';
 import { UserRoundPlus } from 'lucide-react';
+import Avatar from '@mui/material/Avatar';
+
 
 
 const Friend = ({ firstName, lastName, userId }) => {
@@ -107,7 +109,7 @@ const Friend = ({ firstName, lastName, userId }) => {
           
             <div className={`${color} rounded-lg p-4 my-2`}>
               <div className="flex flex-row items-center justify-evenly">
-              <div><img src={userImg.startsWith("http") ?userImg:`${render}/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
+              <div>{userImg ?<img src= {(userImg.startsWith("http") ? userImg : `${render}/assets/${userImg}`)}   alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/>:(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}</div>
                 <div className="w-24">
                   {firstName} {lastName}
                 </div>

@@ -107,7 +107,7 @@ const Friend = ({ firstName, lastName, userId }) => {
           
             <div className={`${color} rounded-lg p-4 my-2`}>
               <div className="flex flex-row items-center justify-evenly">
-              <div><img src={`${render}/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
+              <div><img src={userImg.startsWith("http") ?userImg:`${render}/assets/${userImg}`}  alt="Post Image" className='h-14 w-14 rounded-full  my-3 mr-1 bg-cover mx-auto '/></div>
                 <div className="w-24">
                   {firstName} {lastName}
                 </div>

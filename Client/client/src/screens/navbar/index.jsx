@@ -71,10 +71,8 @@ const dispatch=useDispatch();
   
       // Parse the JSON data from the response
       const data = await response.json();
-      console.log(data)
 
       setUsers(data);
-     console.log(users)
       
 
   
@@ -142,7 +140,7 @@ const dispatch=useDispatch();
         .map((userId)=>{
         
           return ( <a  key={userId._id} href={`/user-profile/${userId._id}`}><div
-         className='flex flex-row items-center w-40  h-16  border-b-2 border-green-950 hover:bg-green-950 hover:cursor-pointer p-2 text-white '> <img src={userId.picture ? (userId.picture.startsWith("http") ? userId.picture  : `${render}/assets/${userId.picture}`):"/assets/placeholder.jpg"}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
+         className='flex flex-row items-center w-40  h-16  border-b-2 border-green-950 hover:bg-green-950 hover:cursor-pointer p-2 text-white '> <img src={userId.picture ? (userId.picture.startsWith("http") ? userId.picture  : `${render}/assets/${userId.picture}`):`${render}/assets/user.jpg`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
            {userId.firstName} {userId.lastName} </div></a>)
           
         })):null}</div>
@@ -159,7 +157,7 @@ const dispatch=useDispatch();
         .map((userId)=>{
         
           return ( <a  key={userId._id} href={`/user-profile/${userId._id}`}><div
-         className='flex flex-row items-center w-40  h-16  border-b-2 border-green-950 hover:bg-green-950 hover:cursor-pointer p-2 text-white font-bold'> <img src={userId.picture ? (userId.picture.startsWith("http") ? userId.picture  : `${render}/assets/${userId.picture}`):"/assets/placeholder.jpg"}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
+         className='flex flex-row items-center w-40  h-16  border-b-2 border-green-950 hover:bg-green-950 hover:cursor-pointer p-2 text-white font-bold'> <img src={userId.picture ? (userId.picture.startsWith("http") ? userId.picture  : `${render}/assets/${userId.picture}`):`${render}/assets/user.jpg`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
            {userId.firstName} {userId.lastName} </div></a>)
           
         })):null}</div>

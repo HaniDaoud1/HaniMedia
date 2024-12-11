@@ -13,7 +13,6 @@ const Profile = () => {
   const render = useSelector((state) => state.auth.render);
   const profile=useSelector((state)=>state.auth.profile);
 
-console.log(userId)
   const navigate=useNavigate();
   
   const mode = useSelector((state) => state.auth.mode);

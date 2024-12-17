@@ -9,6 +9,7 @@ import img from './user.jpg'
 
 const UserWidget = ({ userId ,profile=false }) => {
   const [user, setUser] = useState(null);
+  const[image,setImage]=useState(null)
   const userr = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   const render = useSelector((state) => state.auth.render);
@@ -23,6 +24,13 @@ const UserWidget = ({ userId ,profile=false }) => {
       });
       const data = await response.json();
       setUser(data);
+      if (data && data.picture) {
+        setImage(data.picture);
+      } else {
+        console.warn("No picture found for the user.");
+        // Optionally, set a default picture here
+      }
+      
     } catch (error) {
       console.error('Error fetching user:', error);
     }
@@ -43,12 +51,11 @@ const UserWidget = ({ userId ,profile=false }) => {
   const Profile=()=>{
     navigate('/profile/:userId')
   }
-
   if(!profile){
   return (
     <div className="h-auto w-[100%] min-[800px]:w-[100%]  bg-green-950 rounded-lg   p-2  mx-auto my-2 text-white flex flex-row justify-around">
         <div onClick={Profile} className='flex items-center  flex-col mx-2 max[sm]:m-0 max-[440px]:mx-0 justify-center mt-1'>
-        {user.picture ? ( <img src={(user.picture.startsWith("http") ? user.picture : `${render}/assets/${user.picture}`)}  alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
+        {image ? ( <img src={(image.startsWith("http") ? image : `${render}/assets/${image}`)}  alt="Image" className='h-auto w-auto   rounded-lg  mb-2 ml-1'/>):(<Avatar className='  rounded-lg  mb-2 ml-1'/>)}
         <div className=''>          
             <p className='font-bold hover:text-slate-400 hover:cursor-pointer'>{firstName} {lastName}</p>
            

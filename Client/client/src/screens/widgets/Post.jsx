@@ -331,8 +331,8 @@ function Post({description,image,firstName,lastName,location,profession,userId,p
     <div onClick={() => navigate(`/user-profile/${userId}`)} className='flex items-start   flex-row mx-4 hover:text-gray-500 hover:cursor-pointer'>
      <img src={userImg ? (userImg.startsWith("http") ? userImg : `${render}/assets/${userImg}`):`${render}/assets/user.jpg`}  alt="Post Image" className='h-11 w-11 rounded-full  my-3 mr-1 bg-cover mx-auto '/>
           <div className='flex flex-col'> <div className='flex flex-row'>
-            <p className='font-bold mx-1 mt-3 '> {firstName}</p>
-            <p className='font-bold mx-1 mt-3'>{lastName}</p></div> 
+            <p className='font-bold mx-1 mt-3 '> {firstName} {lastName}</p>
+           </div> 
             <p className=' text-sm '>{location}</p></div>
            </div>
             <div className='flex flex-row justify-between' >{post.userId !== user._id ? (add ? (<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 text-green-600 hover:cursor-pointer hover:bg-slate-800'><UserRoundPlus /></div>):(<div onClick={patchFriend} className='rounded-full bg-slate-700 p-1 hover:cursor-pointer text-red-600 hover:bg-slate-800'><UserRoundMinus /></div>)

@@ -25,40 +25,47 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   const navigate=useNavigate();
   
   const user = useSelector((state) => state.auth.user);
-  dispatch(setRender({ render: "https://hanimedia8.onrender.com" }));
-  const handleFormSubmit=async(values,onSubmitProps)=>{
-    const formData=new FormData();  
-    for (let value in values){
-      formData.append(value,values[value]);
-      
-    }
-    
-   
-    const savedUserResponse=await fetch(
-      `${render}/auth/login`,
-      {
-        method:"POST",   
-        headers:{
-          "Content-type":"application/json"
+  dispatch(setRender({ render: "http://localhost:3001" }));
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    try {
+      // Make the API request
+      const response = await fetch(`${render}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // JSON content type
         },
-        
-        body:JSON.stringify(values)
-      },
-      
-    )
-    const savedUser = await savedUserResponse.json();
-    onSubmitProps.resetForm();
-    if (savedUser){
+        body: JSON.stringify(values), // Send the form data as JSON
+      });
+  
+      // Handle response status
+      if (!response.ok) {
+        const errorResult = await response.json();
+        alert(errorResult.msg || "Login failed. Please check your credentials.");
+        navigate("/");
+        return; // Stop further execution
+      }
+  
+      // Parse the successful response JSON
+      const result = await response.json();
+  
+      // Reset form and update state
+      onSubmitProps.resetForm();
+  
+      // Dispatch Redux action to store user and token
       dispatch(
         setLogin({
-          user:savedUser.user,
-          token:savedUser.token
+          user: result.user,
+          token: result.token,
         })
-
-      )
-
-      navigate('/home')
-    }}
+      );
+  
+      // Redirect to home page
+      navigate("/home");
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("An unexpected error occurred. Please try again later.");
+    }
+  };
   return (
     <> 
     <div className={`${color} min-h-screen pt-8`}>

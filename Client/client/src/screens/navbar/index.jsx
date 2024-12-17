@@ -82,8 +82,10 @@ const dispatch=useDispatch();
       // Handle errors and log the error message
       console.error("Error fetching post:", error.message);
     }}
+    
     useEffect(()=>{
-        GetNotUsers();
+      if (user){
+        GetNotUsers();}
     },[]);
 
     const handleSearch = (e) => {

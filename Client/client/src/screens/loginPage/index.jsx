@@ -25,7 +25,7 @@ const color = mode === 'blanc' ? 'bg-slate-300' : 'bg-grey-950';
   const navigate=useNavigate();
   
   const user = useSelector((state) => state.auth.user);
-  dispatch(setRender({ render: "http://localhost:3001" }));
+  dispatch(setRender({ render: "https://hanimedia8.onrender.com" }));
   const handleFormSubmit = async (values, onSubmitProps) => {
     try {
       // Make the API request
